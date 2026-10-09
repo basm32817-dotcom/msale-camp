@@ -133,11 +133,15 @@
     if (!lastStudent) return;
     const btn = document.getElementById('btn-send-whatsapp');
     const status = document.getElementById('whatsapp-status');
+
+    // حجز نافذة المحادثة ضمن نقرة المستخدم قبل أي انتظار (يمنع المتصفح من حجبها)
+    const chatWindow = WhatsAppSender.reserveChatWindow();
+
     btn.disabled = true;
     status.textContent = 'جارٍ تجهيز الملف وإرساله…';
     try {
       const { blob, filename } = await PDFBuilder.toBlob(lastStudent);
-      const result = await WhatsAppSender.sendPDF(lastStudent, blob, filename);
+      const result = await WhatsAppSender.sendPDF(lastStudent, blob, filename, chatWindow);
       status.textContent = result.message;
       status.className = 'wa-status ' + (result.ok ? 'ok' : result.mode === 'manual' ? 'warn' : 'error');
     } catch (err) {

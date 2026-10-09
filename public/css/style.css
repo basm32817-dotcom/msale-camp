@@ -224,6 +224,13 @@ body {
 
 .btn-ghost { background: transparent; }
 
+.btn-pdf {
+  color: #fff;
+  background: linear-gradient(135deg, #ff8a5c, #e05d2b);
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(224, 93, 43, 0.26);
+}
+
 .btn-block { width: 100%; margin-top: 8px; padding-block: 14px; font-size: 1.08rem; }
 .btn-sm { padding: 9px 16px; font-size: 0.9rem; }
 
@@ -424,7 +431,7 @@ body {
   box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.14);
 }
 
-.actions-card { justify-content: center; }
+.actions-card { justify-content: center; gap: 10px; flex-wrap: wrap; }
 
 .notice {
   background: #fff7e6;
@@ -615,6 +622,30 @@ body {
 }
 
 .pdf-value { font-weight: 600; color: #16303a; }
+
+.pdf-meta {
+  margin-top: 14px;
+  font-size: 14px;
+  color: #33475b;
+  text-align: center;
+}
+
+.pdf-meta strong { color: #0f766e; }
+
+.pdf-all-table { table-layout: fixed; margin-top: 10px; }
+
+.pdf-all-table th {
+  padding: 10px 12px;
+  border: 1.5px solid #0f766e;
+  background: #0f766e;
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.pdf-all-table td { padding: 9px 12px; font-size: 14px; }
+
+.pdf-all-table tbody tr:nth-child(even) td { background: #f3faf9; }
 
 .pdf-foot {
   margin-top: 26px;

@@ -108,8 +108,10 @@
         await PDFBuilder.download(student);
       } else if (btn.dataset.action === 'wa') {
         busy('جارٍ…');
+        // حجز النافذة ضمن نقرة المستخدم قبل أي انتظار
+        const chatWindow = WhatsAppSender.reserveChatWindow();
         const { blob, filename } = await PDFBuilder.toBlob(student);
-        const result = await WhatsAppSender.sendPDF(student, blob, filename);
+        const result = await WhatsAppSender.sendPDF(student, blob, filename, chatWindow);
         alert(result.message);
       } else if (btn.dataset.action === 'delete') {
         if (!confirm(`هل تريد حذف الطالب "${student.name}" نهائيًا؟`)) return;
@@ -127,6 +129,30 @@
   });
 
   refreshBtn.addEventListener('click', load);
+
+  // ----------------------------------------------------------
+  //  PDF لكل الطلاب المسجلين
+  // ----------------------------------------------------------
+  const allPdfBtn = document.getElementById('all-pdf-btn');
+  allPdfBtn.addEventListener('click', async () => {
+    if (!students.length) {
+      alert('لا يوجد طلاب مسجلون بعد لإنشاء القائمة.');
+      return;
+    }
+    const original = allPdfBtn.innerHTML;
+    allPdfBtn.disabled = true;
+    allPdfBtn.textContent = 'جارٍ الإنشاء…';
+    try {
+      const filename = await PDFBuilder.allStudentsPDF(students);
+      alert(`✅ تم إنشاء ملف PDF يضم ${students.length} طالبًا (${filename})`);
+    } catch (err) {
+      alert('تعذر إنشاء ملف PDF لكل الطلاب. تأكد من الاتصال بالإنترنت (لمكتبة PDF) ثم أعد المحاولة.');
+      console.error(err);
+    } finally {
+      allPdfBtn.disabled = false;
+      allPdfBtn.innerHTML = original;
+    }
+  });
 
   // ----------------------------------------------------------
   //  نسخ رابط لوحة الإدارة إلى الحافظة
