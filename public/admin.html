@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f766e" />
+  <title>لوحة الإدارة | الأستاذ علي ضاحي</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔑</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- ☁️ Firebase (التخزين السحابي — للنشر على جت هب) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+</head>
+<body class="page-admin">
+
+  <!-- ======================= الشريط العلوي ======================= -->
+  <header class="admin-header">
+    <div class="container admin-header-inner">
+      <div>
+        <h1>لوحة الإدارة</h1>
+        <p>الأستاذ علي ضاحي — الحاكم · معسكر الدرس</p>
+      </div>
+      <div class="header-actions">
+        <span id="cloud-badge" class="cloud-badge" title="حالة التخزين السحابي">☁️ …</span>
+        <button type="button" id="copy-link-btn" class="btn btn-ghost btn-sm" title="نسخ رابط لوحة الإدارة">📋 نسخ رابط اللوحة</button>
+        <a href="index.html" class="btn btn-ghost btn-sm">📝 استمارة التسجيل</a>
+      </div>
+    </div>
+    <div id="copy-toast" class="copy-toast" role="status" aria-live="polite"></div>
+  </header>
+
+  <main class="container">
+
+    <!-- ======================= الإحصائيات ======================= -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-icon">👥</span>
+        <div>
+          <strong id="students-count">0</strong>
+          <span>إجمالي الطلاب المسجلين</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">📅</span>
+        <div>
+          <strong id="today-count">0</strong>
+          <span>تسجيلات اليوم</span>
+        </div>
+      </div>
+      <div class="stat-card search-card">
+        <label for="search-input" class="stat-icon">🔍</label>
+        <input type="search" id="search-input" placeholder="ابحث بالاسم أو رقم الهاتف…" autocomplete="off" />
+      </div>
+      <div class="stat-card actions-card">
+        <button id="refresh-btn" class="btn btn-primary btn-sm">🔄 تحديث القائمة</button>
+      </div>
+    </section>
+
+    <p id="storage-note" class="notice" hidden>
+      ⚠️ الخادم غير متاح حاليًا، وتُعرض بيانات محفوظة محليًا في هذا المتصفح فقط. شغّل الخادم (<code>npm start</code>) لعرض كل التسجيلات وتفعيل الإرسال الآلي إلى واتساب.
+    </p>
+
+    <!-- ======================= الجدول ======================= -->
+    <section class="card table-card">
+      <div class="table-wrap">
+        <table class="students-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>الاسم</th>
+              <th>رقم الهاتف</th>
+              <th>المرحلة الدراسية</th>
+              <th>تاريخ التسجيل</th>
+              <th>إجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="students-body"></tbody>
+        </table>
+      </div>
+
+      <div id="empty-state" class="empty-state">
+        <span class="empty-icon">📭</span>
+        <p>لا يوجد طلاب مسجلون بعد. ابدأ من صفحة الاستمارة.</p>
+      </div>
+    </section>
+
+    <p class="hint">💡 زر «واتساب» يرسل ملف الـPDF فعليًا عبر WhatsApp Cloud API إذا كان الخادم مربوطًا، وإلا يفتح المحادثة مع الإدارية لإرفاق الملف يدويًا.</p>
+  </main>
+
+  <footer class="footer">
+    <p>الأستاذ علي ضاحي — الحاكم · نظام تسجيل الطلاب في معسكر الدرس</p>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

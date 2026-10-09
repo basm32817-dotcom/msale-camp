@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f766e" />
+  <title>استمارة تسجيل الطلاب في المعسكر | الأستاذ علي ضاحي</title>
+  <meta name="description" content="استمارة تسجيل الطلاب في معسكر الدرس - الأستاذ علي ضاحي (الحاكم)" />
+
+  <!-- خط Cairo للواجهة العربية -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- مكتبات توليد PDF (html2canvas + jsPDF) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- ☁️ Firebase (التخزين السحابي — للنشر على جت هب) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+</head>
+<body class="page-registration">
+
+  <!-- ======================= الترويسة ======================= -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-avatar">🎓</div>
+      <h1 class="hero-name">الأستاذ علي ضاحي</h1>
+      <p class="hero-title">الحاكم</p>
+      <h2 class="hero-camp">استمارة تسجيل الطلاب في المعسكر</h2>
+    </div>
+  </header>
+
+  <!-- ======================= النموذج ======================= -->
+  <main class="container">
+    <form id="registration-form" class="card form-card" novalidate>
+      <h3 class="form-heading">بيانات الطالب</h3>
+      <p class="form-sub">يرجى تعبئة جميع الحقول المطلوبة ثم الضغط على زر التسجيل.</p>
+
+      <!-- الاسم بالكامل -->
+      <div class="field">
+        <label for="name">الاسم بالكامل <span class="req">*</span></label>
+        <input type="text" id="name" name="name" placeholder="مثال: محمد أحمد علي" autocomplete="name" maxlength="80" />
+        <span class="error" id="error-name"></span>
+      </div>
+
+      <!-- رقم الهاتف -->
+      <div class="field">
+        <label for="phone">رقم الهاتف <span class="req">*</span></label>
+        <input type="tel" id="phone" name="phone" class="num-input" placeholder="مثال: 07700000000" autocomplete="tel" maxlength="20" />
+        <span class="error" id="error-phone"></span>
+      </div>
+
+      <!-- المرحلة الدراسية -->
+      <div class="field">
+        <label for="stage">المرحلة الدراسية <span class="req">*</span></label>
+        <select id="stage" name="stage">
+          <option value="" disabled selected>— اختر المرحلة الدراسية —</option>
+        </select>
+        <span class="error" id="error-stage"></span>
+      </div>
+
+      <!-- زر التسجيل -->
+      <button type="submit" id="submit-btn" class="btn btn-primary btn-block">
+        <span class="btn-text">تسجيل الطالب</span>
+      </button>
+    </form>
+
+    <p class="hint">🔒 بياناتك تُستخدم لغرض التسجيل في المعسكر فقط.</p>
+    <p id="cloud-status" class="cloud-status" hidden></p>
+  </main>
+
+  <!-- ======================= رسالة النجاح ======================= -->
+  <div id="success-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="success-icon">✅</div>
+      <h3 class="success-title">تم تسجيل الطالب بنجاح ✅</h3>
+      <div id="success-details" class="success-details"></div>
+
+      <div class="modal-actions">
+        <button type="button" id="btn-download-pdf" class="btn btn-primary">📄 تحميل ملف PDF</button>
+        <button type="button" id="btn-send-whatsapp" class="btn btn-wa">📲 إرسال إلى واتساب الإدارية</button>
+        <button type="button" id="btn-register-another" class="btn btn-ghost">➕ تسجيل طالب آخر</button>
+      </div>
+
+      <p id="whatsapp-status" class="wa-status" aria-live="polite"></p>
+
+      <button type="button" id="btn-close-modal" class="modal-close" aria-label="إغلاق">×</button>
+    </div>
+  </div>
+
+  <!-- ======================= التذييل ======================= -->
+  <footer class="footer">
+    <p id="number-notice" class="notice" hidden></p>
+    <p>الأستاذ علي ضاحي — الحاكم · نظام تسجيل الطلاب في معسكر الدرس</p>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
