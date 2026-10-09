@@ -62,6 +62,7 @@ const WhatsAppSender = (() => {
         `الاسم: ${student.name}\n` +
         `رقم الهاتف: ${student.phone}\n` +
         `المرحلة: ${student.stage}\n` +
+        `المكان: ${student.location || '—'}\n` +
         `وقت التسجيل: ${student.registeredAtLocal}\n\n` +
         `📎 أرفق ملف الـPDF: ${filename}`
     );
@@ -114,7 +115,7 @@ const WhatsAppSender = (() => {
     try {
       const form = new FormData();
       form.append('studentId', student.id || '');
-      form.append('caption', `تسجيل جديد في المعسكر\nالاسم: ${student.name}\nالمرحلة: ${student.stage}`);
+      form.append('caption', `تسجيل جديد في المعسكر\nالاسم: ${student.name}\nالمرحلة: ${student.stage}\nالمكان: ${student.location || '—'}`);
       form.append('file', blob, filename);
 
       const res = await fetch(`${APP_CONFIG.API_BASE}/whatsapp/send-pdf`, {

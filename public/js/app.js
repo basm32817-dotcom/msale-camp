@@ -25,7 +25,7 @@
   // ----------------------------------------------------------
   //  أدوات المساعدة
   // ----------------------------------------------------------
-  const FIELDS = ['name', 'phone', 'stage'];
+  const FIELDS = ['name', 'phone', 'stage', 'location'];
 
   const setError = (field, message) => {
     const input = form.elements[field];
@@ -55,6 +55,7 @@
       name: form.elements.name.value,
       phone: form.elements.phone.value,
       stage: form.elements.stage.value,
+      location: form.elements.location.value,
     };
 
     // 1) التأكد من إدخال جميع البيانات
@@ -99,6 +100,7 @@
       <div class="detail-row"><span>الاسم</span><strong>${escapeHtml(student.name)}</strong></div>
       <div class="detail-row"><span>رقم الهاتف</span><strong dir="ltr">${escapeHtml(student.phone)}</strong></div>
       <div class="detail-row"><span>المرحلة</span><strong>${escapeHtml(student.stage)}</strong></div>
+      <div class="detail-row"><span>المكان</span><strong>${escapeHtml(student.location || '—')}</strong></div>
       <div class="detail-row"><span>وقت التسجيل</span><strong>${escapeHtml(student.registeredAtLocal)}</strong></div>`;
     successModal.classList.add('open');
     successModal.setAttribute('aria-hidden', 'false');

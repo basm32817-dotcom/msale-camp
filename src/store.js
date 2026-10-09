@@ -58,6 +58,7 @@ function createStudent(data) {
     name: String(data.name).trim(),
     phone: String(data.phone).trim(),
     stage: String(data.stage).trim(),
+    location: String(data.location).trim(),
     registeredAt: now.toISOString(),
     registeredAtLocal: formatDateTime(now),
   };

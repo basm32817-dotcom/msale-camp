@@ -83,7 +83,7 @@ app.post('/api/whatsapp/send-pdf', upload.single('file'), async (req, res) => {
     const caption =
       req.body.caption ||
       (student
-        ? `تسجيل جديد في المعسكر\nالاسم: ${student.name}\nالمرحلة: ${student.stage}`
+        ? `تسجيل جديد في المعسكر\nالاسم: ${student.name}\nالمرحلة: ${student.stage}\nالمكان: ${student.location || '—'}`
         : 'استمارة تسجيل طالب في المعسكر');
 
     const result = await whatsapp.sendDocument({

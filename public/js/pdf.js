@@ -35,6 +35,7 @@ const PDFBuilder = (() => {
         ${row('اسم الطالب', student.name)}
         ${row('رقم الهاتف', Storage.digitsOnly(student.phone))}
         ${row('المرحلة الدراسية', student.stage)}
+        ${row('المكان', student.location || '—')}
         ${row('اسم الأستاذ', APP_CONFIG.TEACHER)}
         ${row('اللقب', APP_CONFIG.TITLE)}
         ${row('تاريخ ووقت التسجيل', student.registeredAtLocal || Storage.formatDateTime(new Date(student.registeredAt)))}
@@ -128,6 +129,7 @@ const PDFBuilder = (() => {
           <td><strong>${String(s.name || '—')}</strong></td>
           <td dir="ltr">${Storage.digitsOnly(s.phone) || '—'}</td>
           <td>${String(s.stage || '—')}</td>
+          <td>${String(s.location || '—')}</td>
           <td>${String(s.registeredAtLocal || '—')}</td>
         </tr>`
       )
@@ -146,11 +148,12 @@ const PDFBuilder = (() => {
       </div>
       <table class="pdf-table pdf-all-table">
         <colgroup>
-          <col style="width:7%" />
-          <col style="width:34%" />
-          <col style="width:17%" />
-          <col style="width:18%" />
-          <col style="width:24%" />
+          <col style="width:6%" />
+          <col style="width:26%" />
+          <col style="width:14%" />
+          <col style="width:16%" />
+          <col style="width:16%" />
+          <col style="width:22%" />
         </colgroup>
         <thead>
           <tr>
@@ -158,6 +161,7 @@ const PDFBuilder = (() => {
             <th>اسم الطالب</th>
             <th>رقم الهاتف</th>
             <th>المرحلة</th>
+            <th>المكان</th>
             <th>تاريخ التسجيل</th>
           </tr>
         </thead>

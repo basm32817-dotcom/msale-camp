@@ -449,7 +449,7 @@ body {
 .table-card { padding: 8px; margin-bottom: 22px; overflow: hidden; }
 .table-wrap { overflow-x: auto; }
 
-.students-table { width: 100%; border-collapse: collapse; min-width: 760px; }
+.students-table { width: 100%; border-collapse: collapse; min-width: 880px; }
 
 .students-table thead th {
   text-align: right;

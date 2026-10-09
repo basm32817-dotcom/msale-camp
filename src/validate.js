@@ -19,6 +19,7 @@ function validateStudent(body) {
   const name = String(body.name || '').trim().replace(/\s+/g, ' ');
   const phone = String(body.phone || '').trim();
   const stage = String(body.stage || '').trim();
+  const location = String(body.location || '').trim();
 
   // الاسم بالكامل
   if (!name) {
@@ -46,10 +47,17 @@ function validateStudent(body) {
     errors.stage = 'المرحلة الدراسية غير صحيحة.';
   }
 
+  // المكان
+  if (!location) {
+    errors.location = 'حقل المكان مطلوب.';
+  } else if (location.length > 60) {
+    errors.location = 'المكان طويل جدًا.';
+  }
+
   return {
     valid: Object.keys(errors).length === 0,
     errors,
-    data: { name, phone, stage },
+    data: { name, phone, stage, location },
   };
 }
 

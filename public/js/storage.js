@@ -38,6 +38,7 @@ const Storage = (() => {
     const name = String(data.name || '').trim().replace(/\s+/g, ' ');
     const phone = String(data.phone || '').trim();
     const stage = String(data.stage || '').trim();
+    const location = String(data.location || '').trim();
 
     if (!name) errors.name = 'الاسم بالكامل مطلوب.';
     else if (name.length < 3) errors.name = 'الاسم قصير جدًا، يرجى إدخال الاسم الكامل.';
@@ -51,7 +52,10 @@ const Storage = (() => {
     if (!stage) errors.stage = 'المرحلة الدراسية مطلوبة.';
     else if (!APP_CONFIG.STAGES.includes(stage)) errors.stage = 'المرحلة الدراسية غير صحيحة.';
 
-    return { valid: Object.keys(errors).length === 0, errors, data: { name, phone, stage } };
+    if (!location) errors.location = 'حقل المكان مطلوب.';
+    else if (location.length > 60) errors.location = 'المكان طويل جدًا.';
+
+    return { valid: Object.keys(errors).length === 0, errors, data: { name, phone, stage, location } };
   };
 
   // ---------------- ☁️ Firebase (السحابة) ----------------
@@ -97,6 +101,7 @@ const Storage = (() => {
           name: s.name,
           phone: s.phone,
           stage: s.stage,
+          location: s.location || '',
           registeredAt: s.registeredAt || '',
           registeredAtLocal: s.registeredAtLocal || '',
         }));
@@ -115,6 +120,7 @@ const Storage = (() => {
           name: student.name,
           phone: student.phone,
           stage: student.stage,
+          location: student.location || '',
           registeredAt: student.registeredAt,
           registeredAtLocal: student.registeredAtLocal,
         });

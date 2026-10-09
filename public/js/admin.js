@@ -71,6 +71,7 @@
         <td data-label="الاسم"><strong>${escapeHtml(s.name)}</strong></td>
         <td data-label="رقم الهاتف"><span dir="ltr">${escapeHtml(s.phone)}</span></td>
         <td data-label="المرحلة"><span class="badge">${escapeHtml(s.stage)}</span></td>
+        <td data-label="المكان">${escapeHtml(s.location || '—')}</td>
         <td data-label="تاريخ التسجيل"><span class="date">${escapeHtml(s.registeredAtLocal || '—')}</span></td>
         <td data-label="إجراءات" class="actions">
           <button class="icon-btn pdf" title="إنشاء ملف PDF" data-action="pdf">📄 PDF</button>
