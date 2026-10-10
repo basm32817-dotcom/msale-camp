@@ -127,6 +127,17 @@ body {
 .form-heading { font-size: 1.25rem; font-weight: 800; }
 .form-sub { color: var(--text-soft); font-size: 0.92rem; margin-bottom: 22px; }
 
+.note-register {
+  color: #b45309;
+  background: #fef3c7;
+  border: 1px solid #fbbf24;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
 /* ------------------------------------------------------------
    الحقول
    ------------------------------------------------------------ */
@@ -531,6 +542,60 @@ body {
   color: var(--text-soft);
   font-size: 0.88rem;
   margin: 18px 0 30px;
+}
+
+/* ======================= رسالة الترحيب ======================= */
+.welcome-banner {
+  margin-top: -24px;
+  margin-bottom: 20px;
+}
+
+.welcome-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 24px;
+  text-align: center;
+}
+
+.welcome-emoji {
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+
+.welcome-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.welcome-text {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.9;
+}
+
+.welcome-sign {
+  margin-top: 6px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.welcome-inline {
+  text-align: center;
+  background: #f7fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  margin: 10px 0 6px;
+}
+
+.welcome-inline-title {
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 6px;
 }
 
 /* حالة التخزين السحابي */
