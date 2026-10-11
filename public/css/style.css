@@ -127,14 +127,14 @@ body {
 .form-heading { font-size: 1.25rem; font-weight: 800; }
 .form-sub { color: var(--text-soft); font-size: 0.92rem; margin-bottom: 22px; }
 
-.note-register {
+.note-register-bottom {
   color: #b45309;
   background: #fef3c7;
   border: 1px solid #fbbf24;
   padding: 10px 12px;
   border-radius: var(--radius-sm);
   font-size: 0.92rem;
-  margin-bottom: 16px;
+  margin-top: 16px;
   text-align: center;
 }
 
